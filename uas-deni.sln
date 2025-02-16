@@ -1,0 +1,37 @@
+Imports System.IO
+
+Public Class Form1
+    ' Event handler untuk tombol Baca File
+    Private Sub btnBacaFile_Click(sender As Object, e As EventArgs) Handles btnBacaFile.Click
+        ' Membuka dialog untuk memilih file
+        Dim openFileDialog As New OpenFileDialog()
+
+        ' Menyaring hanya file teks
+        openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
+        
+        ' Jika pengguna memilih file dan menekan OK
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
+            Dim filePath As String = openFileDialog.FileName
+            BacaFile(filePath) ' Memanggil procedure untuk membaca file
+        End If
+    End Sub
+
+    ' Procedure untuk membaca file dan menampilkan isinya
+    Private Sub BacaFile(filePath As String)
+        Try
+            ' Membaca seluruh isi file
+            Dim lines() As String = File.ReadAllLines(filePath)
+
+            ' Menampilkan isi file ke dalam TextBox
+            txtIsiFile.Clear() ' Membersihkan isi TextBox sebelumnya
+            For Each line As String In lines
+                txtIsiFile.AppendText(line & vbCrLf) ' Menambahkan setiap baris ke TextBox
+            Next
+
+        Catch ex As FileNotFoundException
+            MessageBox.Show("File tidak ditemukan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            MessageBox.Show("Terjadi kesalahan: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+End Class
