@@ -1,6 +1,6 @@
 # uas-unsia-deni
-
-```Nama : Deni Rismanto
+```
+Nama : Deni Rismanto
 NIM : 230401010301
 Kelas : IF101
 MK : Pemrograman Visual
